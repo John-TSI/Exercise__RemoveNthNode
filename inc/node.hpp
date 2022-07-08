@@ -4,11 +4,11 @@
 
 struct ListNode
 {
-    int val;
-    ListNode* next;
+    int val{};
+    ListNode* next{};
 
     ListNode();
-    ListNode(int);
+    explicit ListNode(int);
     ListNode(int, ListNode*);
 };
 
