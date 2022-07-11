@@ -3,39 +3,27 @@
 
 ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
 {
-    ListNode* follower{head};
-    ListNode* leader{head};
+    if(!head->next){ return nullptr; }  // linked list contained only one node
+
+    ListNode* follower{head}, * leader{head};
     
-    int count{1};
-    for(int i{0}; i<n; ++i)
-    {
-        if(leader->next != nullptr)
-        {
-            leader = leader->next;
-            ++count;
-        }
-    }   // leader is now n%(#links) links ahead of follower
-
-    while(leader->next != nullptr)
-    {
-        leader = leader->next;
-        follower = follower->next;
-        ++count;
-    }   // follower now points to node before the node to be removed, count = number of nodes in list
-
-    if(count == 1){ head = nullptr; }
-    else if(n == count)
+    while(n--){ leader = leader->next; }  // if n < #nodes: leader is now n nodes ahead of follower, else: n = #nodes and leader = nullptr
+    if(!leader)
     {
         ListNode* tmp{head->next};  // tmp points to new head node
         head->next = nullptr;  // current head node is detached from list
-        head = tmp;  // head points to new head node
+        return tmp;
     }
-    else
+
+    while(leader->next)
     {
-        ListNode* tmp{follower->next};  // tmp points to node to be removed
-        follower->next = tmp->next;  // follower node points to node after removed node
-        tmp->next = nullptr;  // removed node points to nullptr
-    }
+        leader = leader->next;
+        follower = follower->next;
+    }   // follower now points to node before the node to be removed
+
+    ListNode* tmp{follower->next};  // tmp points to node to be removed
+    follower->next = tmp->next;  // follower node points to node after removed node
+    tmp->next = nullptr;  // removed node points to nullptr
 
     return head;
 }

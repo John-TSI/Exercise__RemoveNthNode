@@ -3,6 +3,7 @@
 #include<iostream>
 #include"../inc/solution.hpp"
 
+
 // prints data of all nodes linked to the passed head
 void PrintData(ListNode* head)
 {
@@ -25,7 +26,7 @@ int main()
 	ListNode lone{}; // isolated node
 
 	Solution sol{};
-	PrintData( sol.removeNthFromEnd(&n1, 1) );
+	PrintData( sol.removeNthFromEnd(&n1, 2) );
 
 	return 0;
 }
